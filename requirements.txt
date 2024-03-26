@@ -1,0 +1,4 @@
+asyncio
+sqlalchemy
+asyncpg
+python-dotenv
