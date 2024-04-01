@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 
+from sqlalchemy import Integer, String
 from sqlalchemy.ext.asyncio import (create_async_engine, async_sessionmaker,
                                     AsyncAttrs)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -16,7 +17,7 @@ POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 PG_DSN = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 engine = create_async_engine(PG_DSN)
-session = async_sessionmaker(engine, expire_on_commit=False)
+Session = async_sessionmaker(engine, expire_on_commit=False)
 
 class Base(DeclarativeBase, AsyncAttrs):
     pass
@@ -25,24 +26,24 @@ class SwapiPerson(Base):
     __tablename__ = 'swapi_person'
 
     # ID персонажа
-    id = Mapped[int] = mapped_column(primary_key=True)
-    birth_year = Mapped[str] = mapped_column(str, nullable=True)
-    eye_color = Mapped[str] = mapped_column(str, nullable=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    birth_year: Mapped[str] = mapped_column(String(100), nullable=True)
+    eye_color: Mapped[str] = mapped_column(String(100), nullable=True)
     # строка с названиями фильмов через запятую
-    films = Mapped[str] = mapped_column(str, nullable=True)
-    gender = Mapped[str] = mapped_column(str, nullable=True)
-    hair_color = Mapped[str] = mapped_column(str, nullable=True)
-    height = Mapped[int] = mapped_column(int, nullable=True)
-    homeworld = Mapped[str] = mapped_column(str, nullable=True)
-    mass = Mapped[int] = mapped_column(int, nullable=True)
-    name = Mapped[str] = mapped_column(str)
-    skin_color = Mapped[str] = mapped_column(str, nullable=True)
+    films: Mapped[str] = mapped_column(String(100), nullable=True)
+    gender: Mapped[str] = mapped_column(String(100), nullable=True)
+    hair_color: Mapped[str] = mapped_column(String(100), nullable=True)
+    height: Mapped[int] = mapped_column(Integer, nullable=True)
+    homeworld: Mapped[str] = mapped_column(String(100), nullable=True)
+    mass: Mapped[int] = mapped_column(Integer, nullable=True)
+    name: Mapped[str] = mapped_column(String(100))
+    skin_color: Mapped[str] = mapped_column(String(100), nullable=True)
     # строка с названиями типов через запятую
-    species = Mapped[str] = mapped_column(str, nullable=True)
+    species: Mapped[str] = mapped_column(String(100), nullable=True)
     # строка с названиями кораблей через запятую
-    starships = Mapped[str] = mapped_column(str, nullable=True)
+    starships: Mapped[str] = mapped_column(String(100), nullable=True)
     # строка с названиями транспорта через запятую
-    vehicles = Mapped[str] = mapped_column(str, nullable=True)
+    vehicles: Mapped[str] = mapped_column(String(100), nullable=True)
 
 async def init_db():
     async with engine.begin() as conn:
