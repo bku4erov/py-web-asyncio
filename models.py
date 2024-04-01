@@ -27,23 +27,23 @@ class SwapiPerson(Base):
 
     # ID персонажа
     id: Mapped[int] = mapped_column(primary_key=True)
-    birth_year: Mapped[str] = mapped_column(String(100), nullable=True)
-    eye_color: Mapped[str] = mapped_column(String(100), nullable=True)
+    birth_year: Mapped[str] = mapped_column(String(1000), nullable=True)
+    eye_color: Mapped[str] = mapped_column(String(1000), nullable=True)
     # строка с названиями фильмов через запятую
-    films: Mapped[str] = mapped_column(String(100), nullable=True)
-    gender: Mapped[str] = mapped_column(String(100), nullable=True)
-    hair_color: Mapped[str] = mapped_column(String(100), nullable=True)
-    height: Mapped[int] = mapped_column(Integer, nullable=True)
-    homeworld: Mapped[str] = mapped_column(String(100), nullable=True)
-    mass: Mapped[int] = mapped_column(Integer, nullable=True)
-    name: Mapped[str] = mapped_column(String(100))
-    skin_color: Mapped[str] = mapped_column(String(100), nullable=True)
+    films: Mapped[str] = mapped_column(String(1000), nullable=True)
+    gender: Mapped[str] = mapped_column(String(1000), nullable=True)
+    hair_color: Mapped[str] = mapped_column(String(1000), nullable=True)
+    height: Mapped[str] = mapped_column(String, nullable=True)
+    homeworld: Mapped[str] = mapped_column(String(1000), nullable=True)
+    mass: Mapped[str] = mapped_column(String, nullable=True)
+    name: Mapped[str] = mapped_column(String(1000))
+    skin_color: Mapped[str] = mapped_column(String(1000), nullable=True)
     # строка с названиями типов через запятую
-    species: Mapped[str] = mapped_column(String(100), nullable=True)
+    species: Mapped[str] = mapped_column(String(1000), nullable=True)
     # строка с названиями кораблей через запятую
-    starships: Mapped[str] = mapped_column(String(100), nullable=True)
+    starships: Mapped[str] = mapped_column(String(1000), nullable=True)
     # строка с названиями транспорта через запятую
-    vehicles: Mapped[str] = mapped_column(String(100), nullable=True)
+    vehicles: Mapped[str] = mapped_column(String(1000), nullable=True)
 
 async def init_db():
     async with engine.begin() as conn:
